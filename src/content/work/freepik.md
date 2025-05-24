@@ -1,7 +1,7 @@
 ---
-company: "Google"
-role: "Staff Software Engineer"
-dateStart: "11/27/2022"
+company: "Freepik"
+role: "Product Designer"
+dateStart: "08/01/2023"
 dateEnd: "Current"
 ---
 
