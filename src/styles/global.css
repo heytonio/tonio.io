@@ -71,7 +71,7 @@
 
   /* 7. Body Text */
   .text-body {
-    @apply font-normal text-base md:text-lg text-primary-50 dark:text-primary-50 leading-relaxed; /* Párrafos */
+    @apply font-normal text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75 leading-relaxed; /* Párrafos */
   }
 
   /* 8. Metadata */
@@ -120,28 +120,70 @@
     @apply w-full space-y-6;
   }
 
-  .content-wrapper h1,
-  .content-wrapper h2,
-  .content-wrapper h3,
-  .content-wrapper h4,
-  .content-wrapper h5,
-  .content-wrapper h6 {
-    @apply font-semibold text-primary-75 dark:text-white mb-4;
-  }
+  /* Markdown Content Styles */
+  .content-wrapper {
+    /* Headings */
+    h1, h2, h3, h4, h5, h6 {
+      @apply font-semibold text-primary-75 dark:text-white mb-4;
+    }
 
-  .content-wrapper pre,
-  .content-wrapper code {
-    @apply font-mono;
-  }
+    /* Paragraphs */
+    p {
+      @apply font-normal text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75 leading-relaxed mb-4;
+    }
 
-  .content-wrapper a {
-    @apply font-sans text-action hover:text-action-hover underline underline-offset-2;
-    @apply decoration-primary-10 dark:decoration-primary-10;
-    @apply transition-colors duration-300 ease-in-out;
-  }
+    /* Lists */
+    ul, ol {
+      @apply font-normal text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75 leading-relaxed mb-4 pl-6;
+    }
 
-  .content-wrapper a:hover {
-    @apply decoration-primary-25 dark:decoration-primary-25;
+    ul {
+      @apply list-disc;
+    }
+
+    ol {
+      @apply list-decimal;
+    }
+
+    /* Code blocks */
+    pre, code {
+      @apply font-mono text-sm md:text-base bg-gray-100 dark:bg-gray-800 rounded p-1;
+    }
+
+    pre {
+      @apply p-4 my-4 overflow-x-auto;
+    }
+
+    /* Links */
+    a {
+      @apply font-sans text-action hover:text-action-hover underline underline-offset-2;
+      @apply decoration-primary-10 dark:decoration-primary-10;
+      @apply transition-colors duration-300 ease-in-out;
+    }
+
+    a:hover {
+      @apply decoration-primary-25 dark:decoration-primary-25;
+    }
+
+    /* Blockquotes */
+    blockquote {
+      @apply border-l-4 border-gray-200 dark:border-gray-700 pl-4 italic;
+      @apply text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75;
+    }
+
+    /* Tables */
+    table {
+      @apply w-full border-collapse mb-4;
+      @apply text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75;
+    }
+
+    th, td {
+      @apply border border-gray-200 dark:border-gray-700 p-2;
+    }
+
+    th {
+      @apply font-semibold bg-gray-50 dark:bg-gray-800;
+    }
   }
 }
 

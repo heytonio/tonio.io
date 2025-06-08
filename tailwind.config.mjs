@@ -38,20 +38,47 @@ export default {
             'hr': {
               display: 'none',
             },
-            'p': {
+            'p, ul, ol, li, blockquote': {
               fontFamily: 'portada',
               color: 'rgb(120, 120, 120)',
               fontWeight: 400,
+              fontSize: ['1rem', '1.125rem'],
+              lineHeight: '1.75',
             },
             'h1': {
               fontFamily: 'portada',
               color: 'rgb(0, 0, 0)',
               fontWeight: 700,
+              fontSize: ['1.875rem', '2.25rem'],
+              lineHeight: '1.2',
+              marginBottom: '2rem',
             },
-            'h2, h3, h4': {
+            'h2': {
               fontFamily: 'portada',
               color: 'rgb(64, 64, 64)',
               fontWeight: 600,
+              fontSize: ['1.25rem', '1.5rem'],
+              lineHeight: '1.3',
+              marginTop: '2rem',
+              marginBottom: '1rem',
+            },
+            'h3': {
+              fontFamily: 'portada',
+              color: 'rgb(64, 64, 64)',
+              fontWeight: 600,
+              fontSize: ['1.125rem', '1.25rem'],
+              lineHeight: '1.3',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
+            },
+            'h4': {
+              fontFamily: 'portada',
+              color: 'rgb(64, 64, 64)',
+              fontWeight: 600,
+              fontSize: ['1rem', '1.125rem'],
+              lineHeight: '1.3',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
             },
             'code': {
               color: 'rgb(120, 120, 120)',
@@ -74,20 +101,47 @@ export default {
         },
         invert: {
           css: {
-            'p': {
+            'p, ul, ol, li, blockquote': {
               fontFamily: 'portada',
               color: 'rgb(220, 220, 220)',
               fontWeight: 400,
+              fontSize: ['1rem', '1.125rem'],
+              lineHeight: '1.75',
             },
             'h1': {
               fontFamily: 'portada',
               color: 'rgb(255, 255, 255)',
               fontWeight: 700,
+              fontSize: ['1.875rem', '2.25rem'],
+              lineHeight: '1.2',
+              marginBottom: '2rem',
             },
-            'h2, h3, h4': {
+            'h2': {
               fontFamily: 'portada',
               color: 'rgb(240, 240, 240)',
               fontWeight: 600,
+              fontSize: ['1.25rem', '1.5rem'],
+              lineHeight: '1.3',
+              marginTop: '2rem',
+              marginBottom: '1rem',
+            },
+            'h3': {
+              fontFamily: 'portada',
+              color: 'rgb(240, 240, 240)',
+              fontWeight: 600,
+              fontSize: ['1.125rem', '1.25rem'],
+              lineHeight: '1.3',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
+            },
+            'h4': {
+              fontFamily: 'portada',
+              color: 'rgb(240, 240, 240)',
+              fontWeight: 600,
+              fontSize: ['1rem', '1.125rem'],
+              lineHeight: '1.3',
+              marginTop: '1.5rem',
+              marginBottom: '0.75rem',
             },
             'code': {
               color: 'rgb(230, 230, 230)',
