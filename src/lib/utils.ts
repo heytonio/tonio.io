@@ -13,28 +13,22 @@ export function formatDate(date: Date) {
   }).format(date);
 }
 
-export function readingTime(html: string) {
-  const textOnly = html.replace(/<[^>]+>/g, "");
-  const wordCount = textOnly.split(/\s+/).length;
-  const readingTimeMinutes = ((wordCount / 200) + 1).toFixed();
-  return `${readingTimeMinutes} min read`;
+export function getReadingTime(text: string): string {
+  const words = text.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / 200);
+  return `${minutes} MIN READ`;
 }
 
-export function dateRange(startDate: Date, endDate?: Date | string): string {
-  const startMonth = startDate.toLocaleString("default", { month: "short" });
-  const startYear = startDate.getFullYear().toString();
-  let endMonth;
-  let endYear;
-
-  if (endDate) {
-    if (typeof endDate === "string") {
-      endMonth = "";
-      endYear = endDate;
-    } else {
-      endMonth = endDate.toLocaleString("default", { month: "short" });
-      endYear = endDate.getFullYear().toString();
-    }
+export function dateRange(start: string | Date, end?: string | Date): string {
+  const startDate = new Date(start);
+  const endDate = end ? new Date(end) : new Date();
+  
+  const startYear = startDate.getFullYear();
+  const endYear = endDate.getFullYear();
+  
+  if (startYear === endYear) {
+    return startYear.toString();
   }
-
-  return `${startMonth}${startYear} - ${endMonth}${endYear}`;
+  
+  return `${startYear} - ${end ? endYear : 'Present'}`;
 }

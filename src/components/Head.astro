@@ -4,6 +4,17 @@ import "@fontsource/inter/latin-400.css";
 import "@fontsource/inter/latin-600.css";
 import "@fontsource/lora/400.css";
 import "@fontsource/lora/600.css";
+import "@fontsource/ibm-plex-sans/100.css";
+import "@fontsource/ibm-plex-sans/200.css";
+import "@fontsource/ibm-plex-sans/300.css";
+import "@fontsource/ibm-plex-sans/400.css";
+import "@fontsource/ibm-plex-sans/500.css";
+import "@fontsource/ibm-plex-sans/600.css";
+import "@fontsource/ibm-plex-sans/700.css";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "@fontsource/ibm-plex-mono/600.css";
+import "@fontsource/ibm-plex-mono/700.css";
 import inter400 from "@fontsource/inter/files/inter-latin-400-normal.woff2";
 import inter600 from "@fontsource/inter/files/inter-latin-600-normal.woff2";
 import lora400 from "@fontsource/lora/files/lora-latin-400-normal.woff2";
@@ -18,7 +29,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = "/nano.png" } = Astro.props;
+const { title, description, image = "/minimal-portfolio.png" } = Astro.props;
 ---
 
 <!-- Global Metadata -->
@@ -28,6 +39,9 @@ const { title, description, image = "/nano.png" } = Astro.props;
 <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)">
 <link rel="icon" type="image/x-icon" href="/favicon-light.svg">
 <meta name="generator" content={Astro.generator} />
+
+<!-- Typekit Font -->
+<link rel="stylesheet" href="https://use.typekit.net/gxs3usg.css">
 
 <!-- Font preloads -->
 <link rel="preload" href={inter400} as="font" type="font/woff2" crossorigin/>
@@ -82,28 +96,35 @@ const { title, description, image = "/nano.png" } = Astro.props;
     const backToPrev = document.getElementById("back-to-prev");
     backToPrev?.addEventListener("click", () => window.history.back());
 
-    const lightThemeButton = document.getElementById("light-theme-button");
-    lightThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "light");
-      toggleTheme(false);
-    });
+    // Nuevo botón único para alternar tema
+    const themeToggleButton = document.getElementById("theme-toggle-button");
+    const iconSun = document.getElementById("icon-sun");
+    const iconMoon = document.getElementById("icon-moon");
 
-    const darkThemeButton = document.getElementById("dark-theme-button");
-    darkThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "dark");
-      toggleTheme(true);
-    });
+    function setThemeIcon(isDark) {
+      if (isDark) {
+        iconSun.style.display = "none";
+        iconMoon.style.display = "inline";
+      } else {
+        iconSun.style.display = "inline";
+        iconMoon.style.display = "none";
+      }
+    }
 
-    const systemThemeButton = document.getElementById("system-theme-button");
-    systemThemeButton?.addEventListener("click", () => {
-      localStorage.setItem("theme", "system");
-      toggleTheme(window.matchMedia("(prefers-color-scheme: dark)").matches);
+    // Inicializar ícono según el tema actual
+    setThemeIcon(document.documentElement.classList.contains("dark"));
+
+    themeToggleButton?.addEventListener("click", () => {
+      const isDark = document.documentElement.classList.toggle("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      setThemeIcon(isDark);
     });
 
     window.matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", event => {
         if (localStorage.theme === "system") {
           toggleTheme(event.matches);
+          setThemeIcon(event.matches);
         }
       }
     );

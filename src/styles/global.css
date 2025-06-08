@@ -2,72 +2,157 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-  overflow-y: scroll;
-  color-scheme: light;
+/* Base Typography System */
+@layer base {
+  html {
+    overflow-y: scroll;
+    color-scheme: light;
+    @apply antialiased;
+  }
+
+  html.dark {
+    color-scheme: dark;
+  }
+
+  html,
+  body {
+    @apply size-full;
+  }
+
+  body {
+    @apply font-sans;
+    @apply flex flex-col;
+    @apply bg-background dark:bg-stone-900;
+    @apply text-primary-50 dark:text-primary-50;
+  }
+
+  /* Navigation elements inherit from body */
+  nav a {
+    @apply font-medium font-['IBM_Plex_Sans']; /* Navegación con IBM Plex Sans */
+  }
+
+  /* Post and project titles get explicit sizing for hierarchy */
+  .content-title {
+    @apply text-2xl font-semibold;
+  }
 }
 
-html.dark {
-  color-scheme: dark;
+/* Typography Scale - Ordered by Hierarchy */
+@layer components {
+  /* 1. Primary Headings - Highest in hierarchy */
+  .text-display {
+    @apply font-bold text-3xl md:text-4xl text-primary dark:text-white mb-8; /* H1 páginas */
+  }
+
+  /* 2. Brand Identity */
+  .text-title {
+    @apply font-bold text-lg md:text-xl text-primary dark:text-white; /* Nombre principal */
+  }
+
+  /* 3. Section Headings */
+  .text-heading {
+    @apply font-semibold text-xl md:text-2xl text-primary-75 dark:text-white mb-6; /* Títulos de sección */
+  }
+
+  /* 4. Content Titles */
+  .text-content-title {
+    @apply font-semibold text-xl md:text-2xl text-primary-75 dark:text-primary-50 hover:text-primary dark:hover:text-white transition-colors duration-300; /* Títulos posts/projects */
+  }
+
+  /* 5. Navigation */
+  .text-nav {
+    @apply font-medium font-['IBM_Plex_Sans'] text-base text-primary-50 hover:text-primary dark:hover:text-white transition-colors duration-300; /* Navegación */
+  }
+
+  /* 6. Supporting Text */
+  .text-subtitle {
+    @apply text-base text-primary-50 dark:text-primary-50; /* Rol/subtítulos */
+  }
+
+  /* 7. Body Text */
+  .text-body {
+    @apply font-normal text-base md:text-lg text-primary-50 dark:text-primary-50 leading-relaxed; /* Párrafos */
+  }
+
+  /* 8. Metadata */
+  .text-meta {
+    @apply text-xs font-normal text-primary-25 dark:text-primary-50 mt-2 tracking-wide; /* Fechas, metadatos */
+  }
 }
 
-html,
-body {
-  @apply size-full;
+/* Layout Components */
+@layer components {
+  header {
+    @apply py-5;
+    @apply bg-background/75 dark:bg-stone-900/25;
+    @apply backdrop-blur-sm saturate-200;
+  }
+
+  main {
+    @apply w-full;
+  }
+
+  footer {
+    @apply py-5;
+  }
+
+  /* Grid System */
+  .grid_hentry {
+    @apply grid grid-cols-6 gap-8 w-full;
+  }
+
+  .grid_col {
+    @apply min-w-0 w-full;
+  }
+
+  .grid_col-2-of-6 {
+    @apply col-span-6 md:col-span-2 w-full;
+  }
+
+  .grid_col-4-of-6 {
+    @apply col-span-6 md:col-span-4 w-full;
+  }
 }
 
-body {
-  @apply font-sans antialiased;
-  @apply flex flex-col;
-  @apply bg-stone-100 dark:bg-stone-900;
-  @apply text-black/50 dark:text-white/75;
-}
+/* Content Styles */
+@layer components {
+  .content-wrapper {
+    @apply w-full space-y-6;
+  }
 
-header {
-  @apply fixed top-0 left-0 right-0 z-50 py-5;
-  @apply bg-stone-100/75 dark:bg-stone-900/25;
-  @apply backdrop-blur-sm saturate-200;
-}
+  .content-wrapper h1,
+  .content-wrapper h2,
+  .content-wrapper h3,
+  .content-wrapper h4,
+  .content-wrapper h5,
+  .content-wrapper h6 {
+    @apply font-semibold text-primary-75 dark:text-white mb-4;
+  }
 
-main {
-  @apply flex-1 py-32;
-}
+  .content-wrapper pre,
+  .content-wrapper code {
+    @apply font-mono;
+  }
 
-footer {
-  @apply py-5 text-sm;
-}
-
-article {
-  @apply max-w-full prose dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-  @apply prose-headings:font-semibold prose-p:font-serif;
-  @apply prose-headings:text-black prose-headings:dark:text-white;
-}
-
-@layer utilities {
-  article a {
-    @apply font-sans text-current underline underline-offset-2;
-    @apply decoration-black/15 dark:decoration-white/30;
+  .content-wrapper a {
+    @apply font-sans text-action hover:text-action-hover underline underline-offset-2;
+    @apply decoration-primary-10 dark:decoration-primary-10;
     @apply transition-colors duration-300 ease-in-out;
   }
-  article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/25 dark:decoration-white/50;
+
+  .content-wrapper a:hover {
+    @apply decoration-primary-25 dark:decoration-primary-25;
   }
 }
 
-.animate {
-  @apply opacity-0 translate-y-3;
-  @apply transition-all duration-700 ease-out;
-}
+/* Animations */
+@layer utilities {
+  .animate {
+    @apply opacity-0 translate-y-3;
+    @apply transition-all duration-700 ease-out;
+  }
 
-.animate.show {
-  @apply opacity-100 translate-y-0;
-}
-
-html #back-to-top {
-  @apply opacity-0 pointer-events-none;
-}
-
-html.scrolled #back-to-top {
-  @apply opacity-100 pointer-events-auto;
+  .animate.show {
+    @apply opacity-100 translate-y-0;
+  }
 }

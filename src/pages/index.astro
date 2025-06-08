@@ -1,6 +1,5 @@
 ---
 import { getCollection } from "astro:content";
-import Container from "@components/Container.astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import ArrowCard from "@components/ArrowCard.astro";
 import Link from "@components/Link.astro";
@@ -12,106 +11,58 @@ const blog = (await getCollection("blog"))
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
   .slice(0,SITE.NUM_POSTS_ON_HOMEPAGE);
 
-const projects = (await getCollection("projects"))
-  .filter(project => !project.data.draft)
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .slice(0,SITE.NUM_PROJECTS_ON_HOMEPAGE);
-
-const allwork = (await getCollection("work"))
-  .sort((a, b) => new Date(b.data.dateStart).valueOf() - new Date(a.data.dateStart).valueOf())
-  .slice(0,SITE.NUM_WORKS_ON_HOMEPAGE);
-
-const work = await Promise.all(
-  allwork.map(async (item) => {
-    const { Content } = await item.render();
-    return { ...item, Content };
-  })
-);
-
 ---
 
-<PageLayout title={HOME.TITLE} description={HOME.DESCRIPTION}>
-  <Container>
-    <h4 class="animate font-semibold text-black dark:text-white">
-      Hi, I'm Antonio <span class="text-xl">👋🏻</span> 
-    </h4>
-    <div class="space-y-16">
-      <section>
-        <article class="space-y-4">
-          <p class="animate">
-            A designer focused on UI, e-commerce, and product strategy. In 2014 I founded
-            <Link href="https://creativemarket.com/AntonioPadilla" aria-label="Graphichero" external>
-              Graphichero
-            </Link>.
-            a digital asset shop with 11000+ sales and learned to give a brand a clear voice, keep an online store running smoothly,
-            and include customer feedback in every product update.
-          </p>
-          <p class="animate">
-            At 
-            <Link href="https://www.freepik.com/" aria-label="Freepik" external>
-              Freepik
-            </Link>
-            I work with a cross disciplinary team, turning early ideas into prototypes, watching real users, and refining details until the experience feels right.
-            My work centers on AI-powered tools for images, video, and 3D models: I define use cases, spot friction, and connect design decisions to business goals. 
-          </p>
-          <p class="animate">
-            My goal is simple: make products clear for people and valuable for the company.
-          </p>
-        </article>
-      </section>
+<PageLayout title="About" description={HOME.DESCRIPTION}>
+  <img 
+    src="/img-about.webp" 
+    alt="Antonio Padilla"
+    class="w-full aspect-[4/3] object-cover rounded-lg mb-8"
+  />
+  <div>
+    <section>
+      <article class="space-y-4">
+        <p class="animate font-normal text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75">
+          A designer focused on UI, e-commerce, and product strategy. In 2014 I founded
+          <Link href="https://graphichero.co" aria-label="Graphichero" external class="font-medium">
+            Graphichero
+          </Link>.
+          a digital asset shop with 11000+ sales and learned to give a brand a clear voice, keep an online store running smoothly,
+          and include customer feedback in every product update.
+        </p>
+        <p class="animate font-normal text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75">
+          At 
+          <Link href="https://www.freepik.com/" aria-label="Freepik" external class="font-medium">
+            Freepik
+          </Link>
+          I work with a cross disciplinary team, turning early ideas into prototypes, watching real users, and refining details until the experience feels right.
+          My work centers on AI-powered tools for images, video, and 3D models: I define use cases, spot friction, and connect design decisions to business goals. 
+        </p>
+        <p class="animate font-normal text-base md:text-lg text-[rgb(120,120,120)] dark:text-white/75">
+          My goal is simple: make products clear for people and valuable for the company.
+        </p>
+      </article>
+    </section>
 
-      <section class="animate space-y-6">
-        <div class="flex flex-wrap gap-y-2 items-center justify-between">
-          <h5 class="font-semibold text-black dark:text-white">
-            Work Experience
-          </h5>
-        </div>
-        <ul class="flex flex-col space-y-4">
-          {work.map(entry => (
-            <li>
-              <div class="text-sm opacity-75">
-                {dateRange(entry.data.dateStart, entry.data.dateEnd)}
-              </div>
-              <div class="font-semibold text-black dark:text-white">
-                {entry.data.company}
-              </div>
-              <div class="text-sm opacity-75">
-                {entry.data.role}
-              </div>
-              <article>
-                <entry.Content />
-              </article>
-            </li>
-          ))}
-        </ul>
-      </section>
-
-      <section class="animate space-y-4">
-        <h5 class="font-semibold text-black dark:text-white">
-          Let's Connect
-        </h5>
-        <article>
-          <p>
-            If you want to get in touch with me about something or just to say hi,
-            reach out on social media or send me an email.
-          </p>
-        </article>
-        <ul class="flex flex-wrap gap-2">
-          {SOCIALS.map(SOCIAL => (
-            <li class="flex gap-x-2 text-nowrap">
-              <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`}>
-                {SOCIAL.NAME}
-              </Link>
-              {"/"}
-            </li>
-          ))}
-          <li class="line-clamp-1">
-            <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`}>
-              {SITE.EMAIL}
+    <section class="animate space-y-4 mt-24">
+      <h5 class="font-semibold text-xl md:text-2xl text-black dark:text-white">
+        Let's Connect
+      </h5>
+      <ul class="flex flex-wrap gap-2">
+        {SOCIALS.map(SOCIAL => (
+          <li class="flex gap-x-2 text-nowrap">
+            <Link href={SOCIAL.HREF} external aria-label={`${SITE.NAME} on ${SOCIAL.NAME}`} class="font-medium">
+              {SOCIAL.NAME}
             </Link>
+            {"/"}
           </li>
-        </ul>
-      </section>
-    </div>
-  </Container>
+        ))}
+        <li class="line-clamp-1">
+          <Link href={`mailto:${SITE.EMAIL}`} aria-label={`Email ${SITE.NAME}`} class="font-medium">
+            {SITE.EMAIL}
+          </Link>
+        </li>
+      </ul>
+    </section>
+  </div>
 </PageLayout>
